@@ -3,7 +3,8 @@
 
 # This is the Discord Webhook link
 # To get one, open your server configuration panel, go to "Webhooks", create a webhook and then
-# copy the link to here
+# copy the link to here. A (shortened, invalid) sample Webhook URI:
+# https://discordapp.com/api/webhooks/46745878648/n-FqX6jROlA_oW51qhu
 WebhookLink: "Webhook Link"
 
 # This is the bot username on Discord
@@ -22,13 +23,27 @@ Username: "%player_name%"
 # Or just keep it like that to just show the message
 Format: "%content%"
 
-# Should the message has color stripped from it?
+# This is a alternative method of displaying messages and metadata in Discord
+# First, We're going to name the "bot" with a static name with Username:
+# Then, we're going to change the Format: to include the player's name.
+#
+# Uncomment the below two lines and comment out the above corrosponding lines to use.
+#Username: "AeSixs Minion 1117"
+#Format: "%player_name%: %content%"
+
+# Should messages sent to Discord have their Minecraft colors removed?
 StripColors: true
 
-# This is the bot avatar, you can set to something static or make it the user avatar
+# This is the avatar used by the bot for the Minecraft player's chat.
+# Use "https://minotar.net/helm/%player_name%/64.png" (as set by default)
+# to allow each player's chat to be represented by their skin's head image. 
+# Otherwise, you can set this to any image you prefer.  It is best to use 64px^2 images.
 AvatarUrl: "https://minotar.net/helm/%player_name%/64.png"
 
 # Use PlaceholderAPI? https://www.spigotmc.org/resources/placeholderapi.6245/
+# Without PlaceholderAPI only the very basic placeholders will be available.
+# These placeholders are usable if UsePlaceholderAPI is false:
+# %player_uuid%, %player_name%, %player_displayname%, %stripped_player_displayname%
 UsePlaceholderAPI: true
 
 # Issues should never ever happen, but hey, nothing is perfect.
