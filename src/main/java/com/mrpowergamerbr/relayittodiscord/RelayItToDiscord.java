@@ -29,15 +29,18 @@ public class RelayItToDiscord extends JavaPlugin {
 		if (getConfig().getString("WebhookLink").equals("Webhook Link")) {
 			getLogger().info("Hey, is this your first time using RelayItToDiscord?");
 			getLogger().info("If yes, then you need to add your Webhook URL to the");
-			getLogger().info("config.yml!");
-			getLogger().info("");
-			getLogger().info("...so go there and do that.");
+			getLogger().info("config.yml! ...so go there and do that.");
 			getLogger().info("After doing that, use /relayreload");
 			return;
 		}
-		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI") && getConfig().getBoolean("UsePlaceholderAPI")) {
-			usePlaceholderApi = true;
-		}
+		
+//		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+//			usePlaceholderApi = true;
+//		}
+// if removing the && config option causes issues, reinstate below:
+//		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI") && getConfig().getBoolean("UsePlaceholderAPI")) {
+//			usePlaceholderApi = true;
+//		}
 		temmie = new TemmieWebhook(getConfig().getString("WebhookLink"));
 		startRelaying = true;
 	}
@@ -50,12 +53,15 @@ public class RelayItToDiscord extends JavaPlugin {
 		message = message.replace("%player_uuid%", p.getUniqueId().toString());
 		message = message.replace("%player_displayname%", p.getDisplayName());
 		message = message.replace("%stripped_player_displayname%", ChatColor.stripColor(p.getDisplayName()));
-		
-		if (usePlaceholderApi) {
-			return NoClassDefFoundWorkaround.parsePlaceholders(message, p);
-		} else {
-			return message;
-		}
+		message = message.replace("%server_name%", getServerName());
+
+		return message; //remove or comment this line if re-implimenting the lines below.
+//		if (usePlaceholderApi) {
+//			return NoClassDefFoundWorkaround.parsePlaceholders(message, p);
+//		}
+//		else {
+//			return message;
+//		}
 	}
 
 	@Override
@@ -64,9 +70,10 @@ public class RelayItToDiscord extends JavaPlugin {
 			if (sender.hasPermission("relayittodiscord.reload")) {
 				reloadConfig();
 				setupRelay();
-				sender.sendMessage("§aRelayItToDiscord reloaded!");
-			} else {
-				sender.sendMessage("§cNo permission!");
+				sender.sendMessage("Â§aRelayItToDiscord reloaded!");
+			}
+			else {
+				sender.sendMessage("Â§cNo permission!");
 			}
 			return true;
 
@@ -75,8 +82,8 @@ public class RelayItToDiscord extends JavaPlugin {
 	}
 }
 
-class NoClassDefFoundWorkaround {
-	public static String parsePlaceholders(String message, Player p) {
-		return PlaceholderAPI.setPlaceholders(p, message);
-	}
-}
+//class NoClassDefFoundWorkaround {
+//	public static String parsePlaceholders(String message, Player p) {
+//		return PlaceholderAPI.setPlaceholders(p, message);
+//	}
+//}
