@@ -1,8 +1,12 @@
 name: RelayItToDiscord
 main: com.mrpowergamerbr.relayittodiscord.RelayItToDiscord
-version: 1.0.0
+version: 1.0.1
+Updater: AeSix (Jeremy Denslinger)
 softdepend: ["PlaceholderAPI"]
 commands:
    relayreload:
       description: Reloads RelayItToDiscord
-      usage: /<command>
+      usage: /relayreload
+   relayme:
+      description: Sends IGN, server name, group and the user supplied Discord username+discriminator
+      usage: /relayme @test#7479
